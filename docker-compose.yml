@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./data:/app/data
+    expose: ["8000"]
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    expose: ["3000"]
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    env_file: .env
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [backend, frontend]
+
+volumes:
+  caddy_data:
+  caddy_config:
