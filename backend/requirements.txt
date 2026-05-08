@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+slowapi
+apscheduler
+cryptography
+whisper
+piper-tts
+pydantic
